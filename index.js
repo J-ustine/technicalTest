@@ -81,6 +81,11 @@ form.addEventListener("submit", checkUserRepos);
 function checkUserRepos(event) {
   event.preventDefault();
   publicRepos.innerHTML = null;
+  userInformation.style.border = null;
+  userInformation.style.borderRadius = null;
+  nameProfil.innerHTML = null;
+  numberPublicRepo.innerHTML = null;
+  followers.innerHTML = null;
 
   let nameOfUser = document.getElementById("user").value;
   const fetchPromise = fetch(`https://api.github.com/users/${nameOfUser}`);
@@ -97,10 +102,14 @@ function checkUserRepos(event) {
         displayPublicRepos(nameOfUser);
         userInformation.style.border = "1px solid #6e7681";
         userInformation.style.borderRadius = "10px";
-        nameProfil.innerHTML = `<h4><strong>${result.name}</strong></4>`;
+        if (result.name) {
+          nameProfil.innerHTML = `<h4><strong>${result.name}</strong></4>`;
+        } else {
+          nameProfil.innerHTML = `<h4><strong>${result.login}</strong></4>`;
+        }
         numberPublicRepo.innerHTML = `Public Repositories : ${result.public_repos}`;
         followers.innerHTML = `Followers : ${result.followers}`;
-        city.innerHTML = `Location : ${result.location}`;
+        if (result.location) city.innerHTML = `Location : ${result.location}`;
       } else if (result.public_repos === 0)
         publicRepos.innerHTML = "This user doesn't have any public repository";
     })
