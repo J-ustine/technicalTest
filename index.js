@@ -80,14 +80,7 @@ form.addEventListener("submit", checkUserRepos);
 
 function checkUserRepos(event) {
   event.preventDefault();
-  publicRepos.innerHTML = null;
-  userInformation.style.border = null;
-  userInformation.style.borderRadius = null;
-  nameProfil.innerHTML = null;
-  numberPublicRepo.innerHTML = null;
-  followers.innerHTML = null;
-  city.innerHTML = null;
-
+  clearData();
   let nameOfUser = document.getElementById("user").value;
   const fetchPromise = fetch(`https://api.github.com/users/${nameOfUser}`);
 
@@ -101,8 +94,7 @@ function checkUserRepos(event) {
     .then((result) => {
       if (result.public_repos > 0) {
         displayPublicRepos(nameOfUser);
-        userInformation.style.border = "1px solid #6e7681";
-        userInformation.style.borderRadius = "10px";
+        addStyle();
         if (result.name) {
           nameProfil.innerHTML = `<h4><strong>${result.name}</strong></4>`;
         } else {
@@ -138,4 +130,19 @@ function displayPublicRepos(nameOfUser) {
     .catch((error) => {
       console.log(error);
     });
+}
+
+function clearData() {
+  publicRepos.innerHTML = null;
+  userInformation.style.border = null;
+  userInformation.style.borderRadius = null;
+  nameProfil.innerHTML = null;
+  numberPublicRepo.innerHTML = null;
+  followers.innerHTML = null;
+  city.innerHTML = null;
+}
+
+function addStyle() {
+  userInformation.style.border = "1px solid #6e7681";
+  userInformation.style.borderRadius = "10px";
 }

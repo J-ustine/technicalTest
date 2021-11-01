@@ -10,6 +10,7 @@ body {
 }
 
 /*  SLIDESHOW  */
+
 .slideshow {
   width: 100%;
   max-height: 100vh;
@@ -78,7 +79,6 @@ body {
 
 form {
   margin: 0 auto;
-  text-align: center;
 }
 
 input {
