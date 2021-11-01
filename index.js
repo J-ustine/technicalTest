@@ -86,6 +86,7 @@ function checkUserRepos(event) {
   nameProfil.innerHTML = null;
   numberPublicRepo.innerHTML = null;
   followers.innerHTML = null;
+  city.innerHTML = null;
 
   let nameOfUser = document.getElementById("user").value;
   const fetchPromise = fetch(`https://api.github.com/users/${nameOfUser}`);
